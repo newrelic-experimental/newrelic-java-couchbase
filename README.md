@@ -23,7 +23,7 @@ Set the environment variable NEW_RELIC_EXTENSIONS_DIR to the extensions director
 To build a single module, run the command   
 ./gradlew moduleName:clean moduleName:install   
 To build all modules, run the command:   
-./gradle2 clean install
+./gradlew clean install
 If NEW_RELIC_EXTENSIONS_DIR does not point to the extensions directory of the New Relic Java Agent, copy the resulting jars into the extensions directory   
 Restart the application
 
