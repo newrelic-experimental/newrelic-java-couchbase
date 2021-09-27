@@ -1,5 +1,6 @@
 package com.couchbase.client.java;
 
+import java.util.HashMap;
 import java.util.function.Consumer;
 
 import com.couchbase.client.core.io.CollectionIdentifier;
@@ -15,10 +16,10 @@ import com.newrelic.api.agent.Segment;
 import com.newrelic.api.agent.Trace;
 import com.newrelic.api.agent.weaver.Weave;
 import com.newrelic.api.agent.weaver.Weaver;
-import com.nr.fit.couchbase.instrumentation.NRErrorConsumer;
-import com.nr.fit.couchbase.instrumentation.NRHolder;
-import com.nr.fit.couchbase.instrumentation.NRSignalConsumer;
-import com.nr.fit.couchbase.instrumentation.Utils;
+import com.nr.instrumentation.couchbase.NRErrorConsumer;
+import com.nr.instrumentation.couchbase.NRHolder;
+import com.nr.instrumentation.couchbase.NRSignalConsumer;
+import com.nr.instrumentation.couchbase.Utils;
 
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.SignalType;
@@ -31,6 +32,12 @@ public abstract class ReactiveBinaryCollection {
 	@Trace
 	public Mono<MutationResult> append(String id, byte[] content, AppendOptions options) {
 		String operation = "append";
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("ID", id);
+		String name = Utils.getName(async.collectionIdentifier());
+		attributes.put("CollectionName", name);
+		attributes.put("Operation", operation);
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment(operation);
 		Mono<MutationResult> result = Weaver.callOriginal();
 		CollectionIdentifier identifier = async.collectionIdentifier();
@@ -44,6 +51,12 @@ public abstract class ReactiveBinaryCollection {
 	@Trace
 	public Mono<CounterResult> decrement(String id, DecrementOptions options) {
 		String operation = "decrement";
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("ID", id);
+		String name = Utils.getName(async.collectionIdentifier());
+		attributes.put("CollectionName", name);
+		attributes.put("Operation", operation);
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment(operation);
 		Mono<CounterResult> result = Weaver.callOriginal();
 		CollectionIdentifier identifier = async.collectionIdentifier();
@@ -57,6 +70,12 @@ public abstract class ReactiveBinaryCollection {
 	@Trace
 	public Mono<CounterResult> increment(String id, IncrementOptions options) {
 		String operation = "increment";
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("ID", id);
+		String name = Utils.getName(async.collectionIdentifier());
+		attributes.put("CollectionName", name);
+		attributes.put("Operation", operation);
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment(operation);
 		Mono<CounterResult> result = Weaver.callOriginal();
 		CollectionIdentifier identifier = async.collectionIdentifier();
@@ -70,6 +89,12 @@ public abstract class ReactiveBinaryCollection {
 	@Trace
 	public Mono<MutationResult> prepend(String id, byte[] content, PrependOptions options) {
 		String operation = "prepend";
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("ID", id);
+		String name = Utils.getName(async.collectionIdentifier());
+		attributes.put("CollectionName", name);
+		attributes.put("Operation", operation);
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment(operation);
 		Mono<MutationResult> result = Weaver.callOriginal();
 		CollectionIdentifier identifier = async.collectionIdentifier();

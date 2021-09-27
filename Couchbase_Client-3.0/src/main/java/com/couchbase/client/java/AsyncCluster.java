@@ -1,5 +1,6 @@
 package com.couchbase.client.java;
 
+import java.util.HashMap;
 import java.util.concurrent.CompletableFuture;
 
 import com.couchbase.client.java.query.QueryOptions;
@@ -14,14 +15,18 @@ import com.newrelic.api.agent.Segment;
 import com.newrelic.api.agent.Trace;
 import com.newrelic.api.agent.weaver.Weave;
 import com.newrelic.api.agent.weaver.Weaver;
-import com.nr.fit.couchbase.instrumentation.NRBiConsumer;
-import com.nr.fit.couchbase.instrumentation.Utils;
+import com.nr.instrumentation.couchbase.NRBiConsumer;
+import com.nr.instrumentation.couchbase.Utils;
 
 @Weave
 public abstract class AsyncCluster {
 
 	@Trace
 	public CompletableFuture<QueryResult> query(String statement, QueryOptions options) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("Statement", statement);
+		attributes.put("Operation", "query");
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("query");
 		CompletableFuture<QueryResult> result = Weaver.callOriginal();
 		ParsedDatabaseStatement stmt = Utils.parseSQL(statement);
@@ -41,6 +46,10 @@ public abstract class AsyncCluster {
 	
 	@Trace
 	public CompletableFuture<SearchResult> searchQuery(String indexName, SearchQuery query, SearchOptions options) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("IndexName", indexName);
+		attributes.put("Operation", "searchQuery");
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("searchQuery");
 		CompletableFuture<SearchResult> result = Weaver.callOriginal();
 		DatastoreParameters params = DatastoreParameters.product("Couchbase").collection("?").operation("searchQuery").build();

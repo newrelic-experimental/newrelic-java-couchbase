@@ -1,4 +1,4 @@
-package com.nr.expertservices.instrumentation.couchbase;
+package com.nr.instrumentation.couchbase;
 
 import java.util.logging.Level;
 

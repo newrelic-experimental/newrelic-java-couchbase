@@ -1,4 +1,4 @@
-package com.nr.fit.couchbase.instrumentation;
+package com.nr.instrumentation.couchbase;
 
 import com.newrelic.api.agent.DatastoreParameters;
 import com.newrelic.api.agent.Segment;

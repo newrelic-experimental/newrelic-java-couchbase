@@ -1,5 +1,7 @@
 package com.couchbase.client.java;
 
+import java.util.HashMap;
+
 import com.couchbase.client.java.datastructures.MutationOptionBuilder;
 import com.couchbase.client.java.document.Document;
 import com.couchbase.client.java.document.JsonLongDocument;
@@ -28,6 +30,11 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public <D extends Document<?>> Observable<D> append(final D document) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketID", document.id());
+		attributes.put("BucketName", name());
+		attributes.put("Operation", "append");
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<D> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("Append-"+name());
 		DatastoreParameters params = DatastoreParameters.product("Couchbase").collection(name()).operation("append").build();
@@ -37,6 +44,11 @@ public abstract class CouchbaseAsyncBucket {
 
 	@Trace
 	public <D extends Document<?>> Observable<D> append(D document, final PersistTo persistTo, final ReplicateTo replicateTo) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketID", document.id());
+		attributes.put("BucketName", name());
+		attributes.put("Operation", "append");
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<D> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("Append-"+name());
 		DatastoreParameters params = DatastoreParameters.product("Couchbase").collection(name()).operation("append").build();
@@ -46,6 +58,10 @@ public abstract class CouchbaseAsyncBucket {
 
 	@Trace
 	public Observable<Boolean> close() {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();		
+		attributes.put("BucketName", name());
+		attributes.put("Operation", "close");
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<Boolean> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("Close-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -56,6 +72,14 @@ public abstract class CouchbaseAsyncBucket {
 
 	@Trace
 	public Observable<JsonLongDocument> counter(final String id, final long delta, final long initial, final int expiry) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketID", id);
+		attributes.put("BucketName", name());
+		attributes.put("Delta", delta);
+		attributes.put("Initial", initial);
+		attributes.put("Expiry", expiry);
+		attributes.put("Operation", "counter");
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<JsonLongDocument> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("Counter-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -66,6 +90,14 @@ public abstract class CouchbaseAsyncBucket {
 
 	@Trace
 	public Observable<JsonLongDocument> counter(String id, long delta, long initial, int expiry, final PersistTo persistTo, final ReplicateTo replicateTo) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketID", id);
+		attributes.put("BucketName", name());
+		attributes.put("Delta", delta);
+		attributes.put("Initial", initial);
+		attributes.put("Expiry", expiry);
+		attributes.put("Operation", "counter");
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<JsonLongDocument> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("Counter-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -76,6 +108,11 @@ public abstract class CouchbaseAsyncBucket {
 
 	@Trace
 	public Observable<Boolean> exists(final String id) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketID", id);
+		attributes.put("BucketName", name());
+		attributes.put("Operation", "exists");
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<Boolean> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("Exists-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -86,6 +123,11 @@ public abstract class CouchbaseAsyncBucket {
 
 	@Trace
 	public <D extends Document<?>> Observable<D> get(final String id, final Class<D> target) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketID", id);
+		attributes.put("BucketName", name());
+		attributes.put("Operation", "get");
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<D> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("Append-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -96,6 +138,12 @@ public abstract class CouchbaseAsyncBucket {
 
 	@Trace
 	public <D extends Document<?>> Observable<D> getAndLock(final String id, final int lockTime, final Class<D> target) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketID", id);
+		attributes.put("BucketName", name());
+		attributes.put("LockTime", lockTime);
+		attributes.put("Operation", "getAndLock");
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<D> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("GetAndLock-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -106,6 +154,12 @@ public abstract class CouchbaseAsyncBucket {
 
 	@Trace
 	public <D extends Document<?>> Observable<D> getAndTouch(final String id, final int expiry, final Class<D> target) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketID", id);
+		attributes.put("BucketName", name());
+		attributes.put("Expiry", expiry);
+		attributes.put("Operation", "getAndTouch");
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<D> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("GetAndTouch-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -116,6 +170,11 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public <D extends Document<?>> Observable<D> getFromReplica(final String id, final ReplicaMode type,final Class<D> target) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketID", id);
+		attributes.put("BucketName", name());
+		attributes.put("Operation", "getFromReplica");
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<D> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("GetFromReplica-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -126,6 +185,11 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public <D extends Document<?>> Observable<D> insert(final D document) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketID", document.id());
+		attributes.put("BucketName", name());
+		attributes.put("Operation", "insert");
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<D> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("Insert-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -136,6 +200,11 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public <D extends Document<?>> Observable<D> insert(final D document, final PersistTo persistTo,final ReplicateTo replicateTo) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketID", document.id());
+		attributes.put("BucketName", name());
+		attributes.put("Operation", "insert");
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<D> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("Insert-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -146,6 +215,11 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public <E> Observable<Boolean> listAppend(final String docId, final E element, final MutationOptionBuilder mutationOptionBuilder) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketID", docId);
+		attributes.put("BucketName", name());
+		attributes.put("Operation", "listAppend");
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<Boolean> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("ListAppend-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -156,6 +230,12 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public <E> Observable<E> listGet(String docId, int index, Class<E> elementType) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketID", docId);
+		attributes.put("BucketName", name());
+		attributes.put("Index", index);
+		attributes.put("Operation", "listGet");
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<E> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("ListGet-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -166,6 +246,11 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public <E> Observable<Boolean> listPrepend(final String docId, final E element, final MutationOptionBuilder mutationOptionBuilder) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketID", docId);
+		attributes.put("BucketName", name());
+		attributes.put("Operation", "listPrepend");
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<Boolean> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("ListPrepend-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -176,6 +261,12 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public Observable<Boolean> listRemove(final String docId, final int index, final MutationOptionBuilder mutationOptionBuilder) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketID", docId);
+		attributes.put("BucketName", name());
+		attributes.put("Index", index);
+		attributes.put("Operation", "listRemove");
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<Boolean> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("ListRemove-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -186,6 +277,12 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public <E> Observable<Boolean> listSet(String docId, int index, E element, MutationOptionBuilder mutationOptionBuilder) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketID", docId);
+		attributes.put("BucketName", name());
+		attributes.put("Index", index);
+		attributes.put("Operation", "listSet");
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<Boolean> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("ListSet-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -196,6 +293,12 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public <V> Observable<Boolean> mapAdd(final String docId,final String key,final V value,final MutationOptionBuilder mutationOptionBuilder) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketID", docId);
+		attributes.put("BucketName", name());
+		attributes.put("Key", key);
+		attributes.put("Operation", "mapAdd");
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<Boolean> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("MapAdd-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -206,6 +309,12 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public <V> Observable<V> mapGet(final String docId, final String key, Class<V> valueType) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketID", docId);
+		attributes.put("BucketName", name());
+		attributes.put("Key", key);
+		attributes.put("Operation", "mapGet");
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<V> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("MapGet-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -216,6 +325,12 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public Observable<Boolean> mapRemove(final String docId,final String key,final MutationOptionBuilder mutationOptionBuilder) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketID", docId);
+		attributes.put("BucketName", name());
+		attributes.put("Key", key);
+		attributes.put("Operation", "mapRemove");
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<Boolean> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("MapRemove-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -226,6 +341,11 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public <D extends Document<?>> Observable<D> prepend(final D document) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketID", document.id());
+		attributes.put("BucketName", name());
+		attributes.put("Operation", "prepend");
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<D> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("Prepend-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -236,6 +356,11 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public <D extends Document<?>> Observable<D> prepend(D document, final PersistTo persistTo, final ReplicateTo replicateTo) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketID", document.id());
+		attributes.put("BucketName", name());
+		attributes.put("Operation", "prepend");
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<D> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("Prepend-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -246,6 +371,11 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public Observable<AsyncN1qlQueryResult> query(final N1qlQuery query) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketName", name());
+		attributes.put("Operation", "query");
+		attributes.put("QueryType", "N1ql");
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<AsyncN1qlQueryResult> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("Query-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -256,6 +386,11 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public Observable<AsyncSearchQueryResult> query(final SearchQuery query) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketName", name());
+		attributes.put("Operation", "query");
+		attributes.put("QueryType", "Search");
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<AsyncSearchQueryResult> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("Query-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -266,6 +401,11 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public Observable<AsyncSpatialViewResult> query(final SpatialViewQuery query) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketName", name());
+		attributes.put("Operation", "query");
+		attributes.put("QueryType", "SpatialView");
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<AsyncSpatialViewResult> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("Query-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -276,6 +416,11 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public Observable<AsyncViewResult> query(final ViewQuery query) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketName", name());
+		attributes.put("Operation", "query");
+		attributes.put("QueryType", "View");
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<AsyncViewResult> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("Query-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -286,6 +431,11 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public <E> Observable<E> queuePop(String docId, Class<E> elementType, MutationOptionBuilder mutationOptionBuilder) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketName", name());
+		attributes.put("Operation", "queuePop");
+		attributes.put("DocId", docId);
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<E> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("QueuePop-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -296,6 +446,11 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public <E> Observable<Boolean> queuePush(String docId, E element, MutationOptionBuilder mutationOptionBuilder) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketName", name());
+		attributes.put("Operation", "queuePush");
+		attributes.put("DocId", docId);
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<Boolean> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("QueuePush-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -306,6 +461,11 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public <D extends Document<?>> Observable<D> remove(final D document) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketName", name());
+		attributes.put("Operation", "remove");
+		attributes.put("DocId", document.id());
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<D> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("remove-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -316,6 +476,11 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public <D extends Document<?>> Observable<D> remove(D document, final PersistTo persistTo, final ReplicateTo replicateTo) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketName", name());
+		attributes.put("Operation", "remove");
+		attributes.put("DocId", document.id());
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<D> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("remove-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -326,6 +491,11 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public <D extends Document<?>> Observable<D> replace(final D document) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketName", name());
+		attributes.put("Operation", "replace");
+		attributes.put("DocId", document.id());
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<D> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("replace-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -336,6 +506,11 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public <E> Observable<Boolean> setAdd(String docId, E element, MutationOptionBuilder mutationOptionBuilder) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketName", name());
+		attributes.put("Operation", "setAdd");
+		attributes.put("DocId", docId);
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<Boolean> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("SetAdd-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -346,6 +521,11 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public <E> Observable<Boolean> setContains(final String docId, final E element) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketName", name());
+		attributes.put("Operation", "setContains");
+		attributes.put("DocId", docId);
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<Boolean> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("SetContains-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -356,6 +536,11 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public <E> Observable<E> setRemove(String docId, E element, MutationOptionBuilder mutationOptionBuilder) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketName", name());
+		attributes.put("Operation", "setRemove");
+		attributes.put("DocId", docId);
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<E> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("setRemove-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -366,6 +551,11 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public Observable<Boolean> touch(final String id, final int expiry) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketName", name());
+		attributes.put("Operation", "touch");
+		attributes.put("DocId", id);
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<Boolean> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("MapAdd-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -376,6 +566,11 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public <D extends Document<?>> Observable<Boolean> unlock(D document) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketName", name());
+		attributes.put("Operation", "unlock");
+		attributes.put("DocId", document.id());
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<Boolean> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("Unlock-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -386,6 +581,11 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public <D extends Document<?>> Observable<D> upsert(final D document) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketName", name());
+		attributes.put("Operation", "upsert");
+		attributes.put("DocId", document.id());
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Observable<D> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("upsert-"+name());
 		NewRelic.getAgent().getTransaction().getToken();
@@ -396,6 +596,10 @@ public abstract class CouchbaseAsyncBucket {
 	
 	@Trace
 	public <D extends Document<?>> Observable<D> upsert(final D document, final PersistTo persistTo,final ReplicateTo replicateTo) {
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("BucketName", name());
+		attributes.put("Operation", "upsert");
+		attributes.put("DocId", document.id());
 		Observable<D> result = Weaver.callOriginal();
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment("upsert-"+name());
 		NewRelic.getAgent().getTransaction().getToken();

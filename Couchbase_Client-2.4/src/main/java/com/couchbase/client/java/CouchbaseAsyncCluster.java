@@ -17,6 +17,7 @@ import rx.Observable;
 @Weave
 public abstract class CouchbaseAsyncCluster {
 
+	@SuppressWarnings("rawtypes")
 	@Trace
 	public Observable<AsyncBucket> openBucket(final String name, final String password,
 	        final List<Transcoder<? extends Document, ?>> transcoders) {

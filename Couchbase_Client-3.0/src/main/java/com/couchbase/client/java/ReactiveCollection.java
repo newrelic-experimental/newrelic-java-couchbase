@@ -1,6 +1,7 @@
 package com.couchbase.client.java;
 
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -32,10 +33,10 @@ import com.newrelic.api.agent.Segment;
 import com.newrelic.api.agent.Trace;
 import com.newrelic.api.agent.weaver.Weave;
 import com.newrelic.api.agent.weaver.Weaver;
-import com.nr.fit.couchbase.instrumentation.NRErrorConsumer;
-import com.nr.fit.couchbase.instrumentation.NRHolder;
-import com.nr.fit.couchbase.instrumentation.NRSignalConsumer;
-import com.nr.fit.couchbase.instrumentation.Utils;
+import com.nr.instrumentation.couchbase.NRErrorConsumer;
+import com.nr.instrumentation.couchbase.NRHolder;
+import com.nr.instrumentation.couchbase.NRSignalConsumer;
+import com.nr.instrumentation.couchbase.Utils;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -49,6 +50,13 @@ public class ReactiveCollection {
 	@Trace
 	public Mono<ExistsResult> exists(String id, ExistsOptions options) {
 		String operation = "exists";
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("ID", id);
+		attributes.put("CollectionName", asyncCollection.name());
+		attributes.put("BucketName", asyncCollection.bucketName());
+		attributes.put("Operation", operation);
+		attributes.put("ScopeName", asyncCollection.scopeName());
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment(operation);
 		Mono<ExistsResult> result = Weaver.callOriginal();
 		DatastoreParameters params = DatastoreParameters.product("Couchbase").collection(Utils.getName(asyncCollection)).operation(operation).build();		
@@ -61,6 +69,13 @@ public class ReactiveCollection {
 	@Trace
 	public Mono<GetResult> get(String id, GetOptions options) {
 		String operation = "get";
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("ID", id);
+		attributes.put("CollectionName", asyncCollection.name());
+		attributes.put("BucketName", asyncCollection.bucketName());
+		attributes.put("Operation", operation);
+		attributes.put("ScopeName", asyncCollection.scopeName());
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment(operation);
 		Mono<GetResult> result = Weaver.callOriginal();
 		DatastoreParameters params = DatastoreParameters.product("Couchbase").collection(Utils.getName(asyncCollection)).operation(operation).build();		
@@ -73,6 +88,13 @@ public class ReactiveCollection {
 	@Trace
 	public Flux<GetReplicaResult> getAllReplicas(String id, GetAllReplicasOptions options) {
 		String operation = "getAllReplicas";
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("ID", id);
+		attributes.put("CollectionName", asyncCollection.name());
+		attributes.put("BucketName", asyncCollection.bucketName());
+		attributes.put("Operation", operation);
+		attributes.put("ScopeName", asyncCollection.scopeName());
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment(operation);
 		Flux<GetReplicaResult>  result = Weaver.callOriginal();
 		DatastoreParameters params = DatastoreParameters.product("Couchbase").collection(Utils.getName(asyncCollection)).operation(operation).build();		
@@ -85,6 +107,13 @@ public class ReactiveCollection {
 	@Trace
 	public Mono<GetResult> getAndLock(String id, Duration lockTime, GetAndLockOptions options) {
 		String operation = "getAndLock";
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("ID", id);
+		attributes.put("CollectionName", asyncCollection.name());
+		attributes.put("BucketName", asyncCollection.bucketName());
+		attributes.put("Operation", operation);
+		attributes.put("ScopeName", asyncCollection.scopeName());
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment(operation);
 		Mono<GetResult> result = Weaver.callOriginal();
 		DatastoreParameters params = DatastoreParameters.product("Couchbase").collection(Utils.getName(asyncCollection)).operation(operation).build();		
@@ -97,6 +126,13 @@ public class ReactiveCollection {
 	@Trace
 	public Mono<GetResult> getAndTouch(String id, Duration expiry, GetAndTouchOptions options) {
 		String operation = "getAndTouch";
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("ID", id);
+		attributes.put("CollectionName", asyncCollection.name());
+		attributes.put("BucketName", asyncCollection.bucketName());
+		attributes.put("Operation", operation);
+		attributes.put("ScopeName", asyncCollection.scopeName());
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment(operation);
 		Mono<GetResult> result = Weaver.callOriginal();
 		DatastoreParameters params = DatastoreParameters.product("Couchbase").collection(Utils.getName(asyncCollection)).operation(operation).build();		
@@ -109,6 +145,13 @@ public class ReactiveCollection {
 	@Trace
 	public Mono<GetReplicaResult> getAnyReplica(String id, GetAnyReplicaOptions options) {
 		String operation = "getAnyReplicas";
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("ID", id);
+		attributes.put("CollectionName", asyncCollection.name());
+		attributes.put("BucketName", asyncCollection.bucketName());
+		attributes.put("Operation", operation);
+		attributes.put("ScopeName", asyncCollection.scopeName());
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment(operation);
 		Mono<GetReplicaResult>  result = Weaver.callOriginal();
 		DatastoreParameters params = DatastoreParameters.product("Couchbase").collection(Utils.getName(asyncCollection)).operation(operation).build();		
@@ -121,6 +164,13 @@ public class ReactiveCollection {
 	@Trace
 	public Mono<MutationResult> insert(String id, Object content, InsertOptions options) {
 		String operation = "insert";
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("ID", id);
+		attributes.put("CollectionName", asyncCollection.name());
+		attributes.put("BucketName", asyncCollection.bucketName());
+		attributes.put("Operation", operation);
+		attributes.put("ScopeName", asyncCollection.scopeName());
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment(operation);
 		Mono<MutationResult> result = Weaver.callOriginal();
 		DatastoreParameters params = DatastoreParameters.product("Couchbase").collection(Utils.getName(asyncCollection)).operation(operation).build();		
@@ -133,6 +183,13 @@ public class ReactiveCollection {
 	@Trace
 	public Mono<LookupInResult> lookupIn(String id, List<LookupInSpec> specs, LookupInOptions options) {
 		String operation = "lookupIn";
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("ID", id);
+		attributes.put("CollectionName", asyncCollection.name());
+		attributes.put("BucketName", asyncCollection.bucketName());
+		attributes.put("Operation", operation);
+		attributes.put("ScopeName", asyncCollection.scopeName());
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment(operation);
 		Mono<LookupInResult> result = Weaver.callOriginal();
 		DatastoreParameters params = DatastoreParameters.product("Couchbase").collection(Utils.getName(asyncCollection)).operation(operation).build();		
@@ -145,6 +202,13 @@ public class ReactiveCollection {
 	@Trace
 	public Mono<MutateInResult> mutateIn(String id, List<MutateInSpec> specs,MutateInOptions options) {
 		String operation = "mutateIn";
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("ID", id);
+		attributes.put("CollectionName", asyncCollection.name());
+		attributes.put("BucketName", asyncCollection.bucketName());
+		attributes.put("Operation", operation);
+		attributes.put("ScopeName", asyncCollection.scopeName());
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment(operation);
 		Mono<MutateInResult> result = Weaver.callOriginal();
 		DatastoreParameters params = DatastoreParameters.product("Couchbase").collection(Utils.getName(asyncCollection)).operation(operation).build();		
@@ -157,6 +221,13 @@ public class ReactiveCollection {
 	@Trace
 	public Mono<MutationResult> remove(String id, RemoveOptions options) {
 		String operation = "remove";
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("ID", id);
+		attributes.put("CollectionName", asyncCollection.name());
+		attributes.put("BucketName", asyncCollection.bucketName());
+		attributes.put("Operation", operation);
+		attributes.put("ScopeName", asyncCollection.scopeName());
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment(operation);
 		Mono<MutationResult> result = Weaver.callOriginal();
 		DatastoreParameters params = DatastoreParameters.product("Couchbase").collection(Utils.getName(asyncCollection)).operation(operation).build();		
@@ -169,6 +240,13 @@ public class ReactiveCollection {
 	@Trace
 	public Mono<MutationResult> replace(String id, Object content, ReplaceOptions options) {
 		String operation = "replace";
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("ID", id);
+		attributes.put("CollectionName", asyncCollection.name());
+		attributes.put("BucketName", asyncCollection.bucketName());
+		attributes.put("Operation", operation);
+		attributes.put("ScopeName", asyncCollection.scopeName());
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment(operation);
 		Mono<MutationResult> result = Weaver.callOriginal();
 		DatastoreParameters params = DatastoreParameters.product("Couchbase").collection(Utils.getName(asyncCollection)).operation(operation).build();		
@@ -181,6 +259,13 @@ public class ReactiveCollection {
 	@Trace
 	public Mono<MutationResult> touch(String id, Duration expiry, TouchOptions options) {
 		String operation = "touch";
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("ID", id);
+		attributes.put("CollectionName", asyncCollection.name());
+		attributes.put("BucketName", asyncCollection.bucketName());
+		attributes.put("Operation", operation);
+		attributes.put("ScopeName", asyncCollection.scopeName());
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment(operation);
 		Mono<MutationResult> result = Weaver.callOriginal();
 		DatastoreParameters params = DatastoreParameters.product("Couchbase").collection(Utils.getName(asyncCollection)).operation(operation).build();		
@@ -193,6 +278,13 @@ public class ReactiveCollection {
 	@Trace
 	public Mono<Void> unlock(String id, long cas, UnlockOptions options) {
 		String operation = "unlock";
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("ID", id);
+		attributes.put("CollectionName", asyncCollection.name());
+		attributes.put("BucketName", asyncCollection.bucketName());
+		attributes.put("Operation", operation);
+		attributes.put("ScopeName", asyncCollection.scopeName());
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment(operation);
 		Mono<Void> result = Weaver.callOriginal();
 		DatastoreParameters params = DatastoreParameters.product("Couchbase").collection(Utils.getName(asyncCollection)).operation(operation).build();		
@@ -205,6 +297,13 @@ public class ReactiveCollection {
 	@Trace
 	public Mono<MutationResult> upsert(String id, Object content, UpsertOptions options) {
 		String operation = "upsert";
+		HashMap<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("ID", id);
+		attributes.put("CollectionName", asyncCollection.name());
+		attributes.put("BucketName", asyncCollection.bucketName());
+		attributes.put("Operation", operation);
+		attributes.put("ScopeName", asyncCollection.scopeName());
+		NewRelic.getAgent().getTracedMethod().addCustomAttributes(attributes);
 		Segment segment = NewRelic.getAgent().getTransaction().startSegment(operation);
 		Mono<MutationResult> result = Weaver.callOriginal();
 		DatastoreParameters params = DatastoreParameters.product("Couchbase").collection(Utils.getName(asyncCollection)).operation(operation).build();		
