@@ -19,7 +19,7 @@ import com.newrelic.api.agent.Segment;
 import com.newrelic.api.agent.Trace;
 import com.newrelic.api.agent.weaver.Weave;
 import com.newrelic.api.agent.weaver.Weaver;
-import com.nr.fit.couchbase.instrumentation.NRCouchbaseAction;
+import com.nr.instrumentation.couchbase.NRCouchbaseAction;
 
 import rx.Observable;
 
