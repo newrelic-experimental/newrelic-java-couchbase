@@ -14,10 +14,10 @@ import com.newrelic.api.agent.Segment;
 import com.newrelic.api.agent.Trace;
 import com.newrelic.api.agent.weaver.Weave;
 import com.newrelic.api.agent.weaver.Weaver;
-import com.nr.fit.couchbase.instrumentation.NRErrorConsumer;
-import com.nr.fit.couchbase.instrumentation.NRHolder;
-import com.nr.fit.couchbase.instrumentation.NRSignalConsumer;
-import com.nr.fit.couchbase.instrumentation.Utils;
+import com.nr.instrumentation.couchbase.NRErrorConsumer;
+import com.nr.instrumentation.couchbase.NRHolder;
+import com.nr.instrumentation.couchbase.NRSignalConsumer;
+import com.nr.instrumentation.couchbase.Utils;
 
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.SignalType;

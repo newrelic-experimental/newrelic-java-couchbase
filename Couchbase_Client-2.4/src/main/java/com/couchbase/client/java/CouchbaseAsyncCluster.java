@@ -10,13 +10,14 @@ import com.newrelic.api.agent.Segment;
 import com.newrelic.api.agent.Trace;
 import com.newrelic.api.agent.weaver.Weave;
 import com.newrelic.api.agent.weaver.Weaver;
-import com.nr.fit.couchbase.instrumentation.NRCouchbaseAction;
+import com.nr.instrumentation.couchbase.NRCouchbaseAction;
 
 import rx.Observable;
 
 @Weave
 public abstract class CouchbaseAsyncCluster {
 
+	@SuppressWarnings("rawtypes")
 	@Trace
 	public Observable<AsyncBucket> openBucket(final String name, final String password,
 	        final List<Transcoder<? extends Document, ?>> transcoders) {

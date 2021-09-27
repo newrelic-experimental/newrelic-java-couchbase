@@ -1,4 +1,4 @@
-package com.nr.fit.couchbase.instrumentation;
+package com.nr.instrumentation.couchbase;
 
 import java.util.function.Consumer;
 

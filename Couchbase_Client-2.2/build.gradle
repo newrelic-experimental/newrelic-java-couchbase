@@ -7,8 +7,8 @@ dependencies {
     implementation 'com.couchbase.client:java-client:2.2.0'
 
    // New Relic Java Agent dependencies
-   implementation 'com.newrelic.agent.java:newrelic-agent:6.0.0'
-   implementation 'com.newrelic.agent.java:newrelic-api:6.0.0'
+   implementation 'com.newrelic.agent.java:newrelic-agent:6.4.0'
+   implementation 'com.newrelic.agent.java:newrelic-api:6.4.0'
    implementation fileTree(include: ['*.jar'], dir: '../libs')
 }
 
@@ -22,5 +22,8 @@ jar {
 }
 
 verifyInstrumentation {
-  	passes 'com.couchbase.client:java-client:[2.2.0,2.7.4]'
+  	passes 'com.couchbase.client:java-client:[2.2.0,2.7.5)'
+  	passes 'com.couchbase.client:java-client:(2.7.5,2.7.8)'
+  	passes 'com.couchbase.client:java-client:(2.7.8,3.0.0)'
+  	
 }
