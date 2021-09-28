@@ -13,8 +13,7 @@
 ![GitHub issues](https://img.shields.io/github/issues/newrelic-experimental/newrelic-java-couchbase)
 ![GitHub issues closed](https://img.shields.io/github/issues-closed/newrelic-experimental/newrelic-java-couchbase)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/newrelic-experimental/newrelic-java-couchbase)
-![GitHub pull requests closed](https://img.shields.io/github/issues-pr-closed/newrelic-experimental/newrelic-java-couchbase)   
-
+![GitHub pull requests closed](https://img.shields.io/github/issues-pr-closed/newrelic-experimental/newrelic-java-couchbase)
 # Couchbase Data Source Instrumentation
 
 Instrumentation to track calls to Couchbase.
