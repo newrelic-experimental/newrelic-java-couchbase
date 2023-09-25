@@ -1,3 +1,8 @@
+## Version: [v2.1.1](https://github.com/newrelic-experimental/newrelic-java-couchbase/releases/tag/v2.1.1) | Created: 2023-09-25
+### Build Upgrades
+- Updated vendor title and added release workflow
+
+
 ## Installation
 
 To install:
