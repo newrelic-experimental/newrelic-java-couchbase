@@ -18,6 +18,10 @@
 
 Instrumentation to track calls to Couchbase.
 
+# Migrated to the Java Agent
+
+Instrumentation for Couchbase Client is now included in the Java Agent for versions 8.20.0 and later.  It is recommended that you use version 8.20.0 or later of the Java Agent rather than installing these extensions.  This repository has been archived and will no longer be supported.    
+
 ## Installation
 
 1. Download the Release jars   
