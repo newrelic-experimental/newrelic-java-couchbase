@@ -1,4 +1,5 @@
-<a href="https://opensource.newrelic.com/oss-category/#new-relic-experimental"><picture><source media="(prefers-color-scheme: dark)" srcset="https://github.com/newrelic/opensource-website/raw/main/src/images/categories/dark/Experimental.png"><source media="(prefers-color-scheme: light)" srcset="https://github.com/newrelic/opensource-website/raw/main/src/images/categories/Experimental.png"><img alt="New Relic Open Source experimental project banner." src="https://github.com/newrelic/opensource-website/raw/main/src/images/categories/Experimental.png"></picture></a>
+<a href="https://opensource.newrelic.com/oss-category/#archived"><picture><source media="(prefers-color-scheme: dark)" srcset="https://github.com/newrelic/opensource-website/raw/main/src/images/categories/dark/Archived.png"><source media="(prefers-color-scheme: light)" srcset="https://github.com/newrelic/opensource-website/raw/main/src/images/categories/Archived.png"><img alt="New Relic Open Source archived project banner." src="https://github.com/newrelic/opensource-website/raw/main/src/images/categories/Archived.png"></picture></a>
+
 
 ![GitHub forks](https://img.shields.io/github/forks/newrelic-experimental/newrelic-java-couchbase?style=social)
 ![GitHub stars](https://img.shields.io/github/stars/newrelic-experimental/newrelic-java-couchbase?style=social)
@@ -17,6 +18,10 @@
 # Couchbase Data Source Instrumentation
 
 Instrumentation to track calls to Couchbase.
+
+# Migrated to the Java Agent
+
+Instrumentation for Couchbase Client is now included in the Java Agent for versions 8.20.0 and later.  It is recommended that you use version 8.20.0 or later of the Java Agent rather than installing these extensions.  This repository has been archived and will no longer be supported.    
 
 ## Installation
 
